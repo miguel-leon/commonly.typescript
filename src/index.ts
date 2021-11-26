@@ -1,2 +1,2 @@
-export * from './interpolate';
-export * from './debounce';
+export * as Strings from './strings';
+export * as Functions from './functions';

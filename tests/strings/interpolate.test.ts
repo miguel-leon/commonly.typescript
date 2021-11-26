@@ -1,4 +1,4 @@
-import { interpolate } from '../src';
+import { interpolate } from '@src/strings';
 
 
 describe('The interpolate function', () => {
