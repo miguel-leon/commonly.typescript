@@ -1,5 +1,5 @@
 {
-  "name": "utils.typescript",
+  "name": "commonly.typescript",
   "version": "0.0.1",
   "description": "Utils Typescript",
   "scripts": {
@@ -28,5 +28,9 @@
       "import": "./*/index.js",
       "require": "./cjs/*/index.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguel-leon/commonly.typescript"
   }
 }
