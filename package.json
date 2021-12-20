@@ -1,10 +1,10 @@
 {
   "name": "commonly.typescript",
   "version": "0.0.1",
-  "description": "Utils Typescript",
+  "description": "Well typed sorted utilities commonly desired.",
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc && tsc -p tsconfig-cjs.json && cp package.json ./dist",
+    "build": "tsc && tsc -p tsconfig-cjs.json && cp package.json , readme.md ./dist",
     "test": "jest",
     "lint": "eslint --ext .ts ."
   },
