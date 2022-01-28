@@ -8,6 +8,7 @@ From `commonly.typescript` import *modules* (*namespaces*):
 - `Strings`
 - `Functions`
 - `Templates`
+- `Objects`
 
 Or from `commonly.typescript/*` import individual members of the *module* (*namespace*).
 
@@ -86,4 +87,34 @@ regexp('<.+>') == /<.+>/;
 regexp`\b(${ ['hello', 'world'].join('|') })\b` == /\b(hello|world)\b/;
 regexp.gi`another regexp` == /another regexp/gi;
 regexp.g.m(true)`conditional m flag` == /conditional m flag/gm;
+```
+
+
+
+`Objects` module
+---
+`commonly.typescript/objects`
+
+- ### `pick`
+
+Creates a picker function with the passed properties, that extracts only those properties from an object argument and creates another object with those properties.
+
+```typescript
+function pick<Properties extends string[]>(...properties: Properties): Picker<Properties>;
+
+interface Picker<Properties> {
+	<T>(object: T): {
+		[K in Extract<keyof T, Properties>]: T[K];
+	};
+}
+```
+
+#### Usage:
+
+```typescript
+pick('prop1')({ prop1: 1, ... }) == { prop1: 1 };
+
+const picker = pick('prop2');
+picker({ prop2: 2, ... }) == { prop2: 2 };
+picker({ ... }) == {};
 ```
