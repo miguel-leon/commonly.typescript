@@ -65,6 +65,24 @@ picker({ prop2: 2, ... }) == { prop2: 2 };
 picker({ ... }) == {};
 ```
 
+- ### `prune`
+
+Creates a new object without the nullish properties of the passed object. It requires the type of the passed object to have at least one optional or nullable property.
+
+```typescript
+function prune<T>(object: HasOptionalProperties<T>): Prune<T>;
+
+type Prune<T> = {
+	[k in NonNullableProperties<T>]: T[k];
+};
+```
+
+#### Usage:
+
+```typescript
+prune({ a: false, b: undefined, c: null }) == { a: false };
+```
+
 
 
 `Strings` module
