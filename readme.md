@@ -88,6 +88,30 @@ picker({ prop2: 2, ... }) == { prop2: 2 };
 picker({ ... }) == {};
 ```
 
+- ### `omit`
+
+Creates an omitter function with the passed properties, that extracts all but those properties from an object argument and creates another object with the extracted properties.
+
+```typescript
+function omit<Properties extends string[]>(...properties: Properties): Omitter<Properties>;
+
+interface Omitter<Properties> {
+	<T>(object: T): {
+		[K in Exclude<keyof T, Properties>]: T[K];
+	};
+}
+```
+
+#### Usage:
+
+```typescript
+omit('prop1')({ prop1: 1, ... }) == { ... };
+
+const omitter = omit('prop2');
+omitter({ prop2: 2, ... }) == { ... };
+omitter({ ... }) == { ... };
+```
+
 - ### `prune`
 
 Creates a new object without the nullish properties of the passed object. It requires the type of the passed object to have at least one optional or nullable property.
