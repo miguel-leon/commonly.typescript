@@ -10,7 +10,7 @@ describe('The regexp function', () => {
 	});
 
 	test('creates a RegExp from a tagged template literal', () => {
-		const result = regexp`\b(${ ['hello', 'world'].join('|') })\b`
+		const result = regexp`\b(${ ['hello', 'world'].join('|') })\b`;
 
 		expect(result).toEqual(/\b(hello|world)\b/);
 	});

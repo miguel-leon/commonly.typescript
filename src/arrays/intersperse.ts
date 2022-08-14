@@ -7,5 +7,5 @@ export function intersperse<T>(item: T, every = 1) {
 				(shift++, item);
 		}
 		return result;
-	}
+	};
 }
