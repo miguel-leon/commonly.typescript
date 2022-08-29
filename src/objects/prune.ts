@@ -19,7 +19,7 @@ export type NonNullableProperties<T> =
 		never;
 
 export type Prune<T> = {
-	[k in NonNullableProperties<T>]: T[k]
+	[k in NonNullableProperties<T>]: NonNullable<T[k]>
 };
 
 export function prune<T>(object: HasOptionalProperties<T>): Prune<T> {
