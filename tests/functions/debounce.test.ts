@@ -19,4 +19,17 @@ describe('The debounce function', () => {
 
 		expect(callback).toHaveBeenNthCalledWith(1, 'three');
 	});
+
+	test('preserves `this` within the callback', () => {
+		const obj = {
+			att: 9,
+			fn() {
+				expect(this.att).toBe(9);
+			}
+		};
+		obj.fn = debounce(obj.fn);
+
+		obj.fn();
+		jest.runAllTimers();
+	});
 });
