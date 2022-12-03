@@ -15,14 +15,17 @@ describe('The interpolate function', () => {
 	test('respects escaped symbols', () => {
 		const backslash = '\\';
 		const template = backslash + '${ escaped }, '
+			+ '${ end_escaped' + backslash + '} }, '
 			+ backslash.repeat(4) + '${ not_escaped }, '
 			+ backslash.repeat(7) + '${ escaped }';
 
 		const result = interpolate(template, {
-			not_escaped: 'INTERPOLATED'
+			not_escaped: 'INTERPOLATED',
+			'end_escaped\\}': 'INTERPOLATED'
 		});
 
 		expect(result).toBe(backslash + '${ escaped }, '
+			+ 'INTERPOLATED, '
 			+ backslash.repeat(4) + 'INTERPOLATED, '
 			+ backslash.repeat(7) + '${ escaped }');
 	});
