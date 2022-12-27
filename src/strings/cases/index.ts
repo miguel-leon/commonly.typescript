@@ -17,15 +17,20 @@ export namespace cases {
 
 
 function CaseConverterFactory({ separator, letterCase, firstLetterCase }: CaseConverterFactory): CaseConverter {
-	const matcher = regexp.g.m`(?:(^)|${ separator || '(?<=[a-z])(?=[A-Z])' })(\w)`;
+	const breaker = separator ?
+		`(?:(^)|${ separator })` :
+		'(^|[a-z](?=[A-Z]))';
+	const matcher = regexp.g.m`${ breaker }(\w)`;
 	const fn = (source: string) => {
 		for (const k in cases) {
 			source = source.replaceAll(
 				(cases as any)[k].matcher,
-				(_, start, letter) => `${
-					start === '' ? '' : separator
+				(_, prev, next) => `${
+					prev === undefined ?
+						separator :
+						prev && `${ prev }${ separator }`
 				}${
-					letter[`to${ start === '' ? firstLetterCase : letterCase }`]()
+					next[`to${ prev === '' ? firstLetterCase : letterCase }`]()
 				}`
 			);
 		}
