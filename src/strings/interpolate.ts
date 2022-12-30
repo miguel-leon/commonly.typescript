@@ -1,16 +1,18 @@
 export function interpolate(template: string, context: { [k: string]: any }): string {
 	return template.replace(
 		interpolate.matcher,
-		(_, start, key) => {
+		(match, key) => {
+			if (!key) return match;
+
 			const value = context[key];
 			if (value === undefined) {
 				throw new TypeError(`Missing key \`${ key }\` in context`);
 			}
-			return start + value;
+			return value;
 		}
 	);
 }
 
 export namespace interpolate {
-	export const matcher = /((?:[^\\]|^)(?:\\\\)*)\${\s*((?:\\.|[^\\])*?)\s*}/gm;
+	export const matcher = /\${\s*((?:\\.|[^])*?)\s*}|\\./gm;
 }

@@ -4,9 +4,10 @@ import { interpolate } from '@src/strings';
 describe('The interpolate function', () => {
 
 	test('interpolate all keys correctly', () => {
-		const result = interpolate('${ a } ${ b }!!!', {
+		const result = interpolate('${ a } ${ b }${ c }', {
 			a: 'Hello',
-			b: 'world'
+			b: 'world',
+			c: '!!!'
 		});
 
 		expect(result).toBe('Hello world!!!');
