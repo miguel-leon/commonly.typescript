@@ -4,131 +4,159 @@ import { cases } from '@src/strings';
 describe('The case conversion functions', () => {
 	describe('The camel case function', () => {
 		test('from kebab case', () => {
-			const result = cases.camel('this-is-it');
+			const result = cases.camel('this-1s-it');
 
-			expect(result).toBe('thisIsIt');
+			expect(result).toBe('this1sIt');
 		});
 
 		test('from sentence case', () => {
-			const result = cases.camel('Hello it\'s me');
+			const result = cases.camel('Hell0 it\'s me');
 
-			expect(result).toBe('helloIt\'sMe');
+			expect(result).toBe('hell0It\'sMe');
 		});
 
 		test('from snake case', () => {
-			const result = cases.camel('this_is_it');
+			const result = cases.camel('this_1s_it');
 
-			expect(result).toBe('thisIsIt');
+			expect(result).toBe('this1sIt');
 		});
 
 		test('from title case', () => {
-			const result = cases.camel('Hello It\'s Me');
+			const result = cases.camel('Hell0 It\'s Me');
 
-			expect(result).toBe('helloIt\'sMe');
+			expect(result).toBe('hell0It\'sMe');
 		});
 	});
 
 	describe('The kebab case function', () => {
 		test('from camel case', () => {
-			const result = cases.kebab('thisIsIt');
+			const result = cases.kebab('this1sIt');
 
-			expect(result).toBe('this-is-it');
+			expect(result).toBe('this-1s-it');
 		});
 
 		test('from sentence case', () => {
-			const result = cases.kebab('Hello it\'s me');
+			const result = cases.kebab('Hell0 it\'s me');
 
-			expect(result).toBe('hello-it\'s-me');
+			expect(result).toBe('hell0-it\'s-me');
 		});
 
 		test('from snake case', () => {
-			const result = cases.kebab('this_is_it');
+			const result = cases.kebab('this_1s_it');
 
-			expect(result).toBe('this-is-it');
+			expect(result).toBe('this-1s-it');
 		});
 
 		test('from title case', () => {
-			const result = cases.kebab('Hello It\'s Me');
+			const result = cases.kebab('Hell0 It\'s Me');
 
-			expect(result).toBe('hello-it\'s-me');
+			expect(result).toBe('hell0-it\'s-me');
 		});
 	});
 
 	describe('The sentence case function', () => {
 		test('from camel case', () => {
-			const result = cases.sentence('thisIsIt');
+			const result = cases.sentence('this1sIt');
 
-			expect(result).toBe('This is it');
+			expect(result).toBe('This 1s it');
 		});
 
 		test('from kebab case', () => {
-			const result = cases.sentence('this-is-it');
+			const result = cases.sentence('this-1s-it');
 
-			expect(result).toBe('This is it');
+			expect(result).toBe('This 1s it');
 		});
 
 		test('from snake case', () => {
-			const result = cases.sentence('this_is_it');
+			const result = cases.sentence('this_1s_it');
 
-			expect(result).toBe('This is it');
+			expect(result).toBe('This 1s it');
 		});
 
 		test('from title case', () => {
-			const result = cases.sentence('Hello It\'s Me');
+			const result = cases.sentence('Hell0 It\'s Me');
 
-			expect(result).toBe('Hello it\'s me');
+			expect(result).toBe('Hell0 it\'s me');
 		});
 	});
 
 	describe('The snake case function', () => {
 		test('from camel case', () => {
-			const result = cases.snake('thisIsIt');
+			const result = cases.snake('this1sIt');
 
-			expect(result).toBe('this_is_it');
+			expect(result).toBe('this_1s_it');
 		});
 
 		test('from kebab case', () => {
-			const result = cases.snake('this-is-it');
+			const result = cases.snake('this-1s-it');
 
-			expect(result).toBe('this_is_it');
+			expect(result).toBe('this_1s_it');
 		});
 
 		test('from sentence case', () => {
-			const result = cases.snake('Hello it\'s me');
+			const result = cases.snake('Hell0 it\'s me');
 
-			expect(result).toBe('hello_it\'s_me');
+			expect(result).toBe('hell0_it\'s_me');
 		});
 
 		test('from title case', () => {
-			const result = cases.snake('Hello It\'s Me');
+			const result = cases.snake('Hell0 It\'s Me');
 
-			expect(result).toBe('hello_it\'s_me');
+			expect(result).toBe('hell0_it\'s_me');
 		});
 	});
 
 	describe('The title case function', () => {
 		test('from camel case', () => {
-			const result = cases.title('thisIsIt');
+			const result = cases.title('this1sIt');
 
-			expect(result).toBe('This Is It');
+			expect(result).toBe('This 1s It');
 		});
 
 		test('from kebab case', () => {
-			const result = cases.title('this-is-it');
+			const result = cases.title('this-1s-it');
 
-			expect(result).toBe('This Is It');
+			expect(result).toBe('This 1s It');
 		});
 
 		test('from sentence case', () => {
-			const result = cases.title('Hello it\'s me');
+			const result = cases.title('Hell0 it\'s me');
 
-			expect(result).toBe('Hello It\'s Me');
+			expect(result).toBe('Hell0 It\'s Me');
 		});
 
 		test('from snake case', () => {
-			const result = cases.title('this_is_it');
+			const result = cases.title('this_1s_it');
 
-			expect(result).toBe('This Is It');
+			expect(result).toBe('This 1s It');
+		});
+	});
+
+	describe('Some edge cases', () => {
+		test('Non camel case input with uppercase', () => {
+			const value = 'HeLLo TherE';
+
+			expect(cases.kebab(value)).toBe('he-l-lo-ther-e');
+			expect(cases.sentence(value)).toBe('He l lo ther e');
+			expect(cases.title(value)).toBe('He L Lo Ther E');
+			expect(cases.camel(value)).toBe('heLLoTherE');
+
+			expect(
+				cases.camel(
+					cases.sentence(
+						cases.title(
+							cases.kebab(value)
+						)
+					)
+				)
+			).toBe('heLLoTherE');
+		});
+
+		test('Camel case input with numbers', () => {
+			const value = '1stNumber69th';
+
+			expect(cases.sentence(value)).toBe('1st number 69th');
+			expect(cases.kebab(value)).toBe('1st-number-69th');
 		});
 	});
 });

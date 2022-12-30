@@ -1,4 +1,4 @@
-import { regexp } from '../../templates';
+import { words } from '../../strings';
 
 import * as camelFactory from './camel';
 import * as kebabFactory from './kebab';
@@ -17,29 +17,16 @@ export namespace cases {
 
 
 function CaseConverterFactory({ separator, letterCase, firstLetterCase }: CaseConverterFactory): CaseConverter {
-	const breaker = separator ?
-		`(?:(^)|${ separator })` :
-		'(^|[a-z](?=[A-Z]))';
-	const matcher = regexp.g.m`${ breaker }(\w)`;
-	const fn = (source: string) => {
-		for (const k in cases) {
-			source = source.replaceAll(
-				(cases as any)[k].matcher,
-				(_, prev, next) => `${
-					prev === undefined ?
-						separator :
-						prev && `${ prev }${ separator }`
-				}${
-					next[`to${ prev === '' ? firstLetterCase : letterCase }`]()
-				}`
-			);
-		}
-		return source;
+	return (source: string) => {
+		return words(source)
+			.map(
+				(word, index) =>
+					word.charAt(0)[`to${ index ? letterCase : firstLetterCase }`]() +
+					word.substring(1)
+			)
+			.join(separator);
 	};
-	fn.matcher = matcher;
-	return fn;
 }
-
 
 interface CaseConverterFactory {
 	separator: string;
@@ -51,6 +38,4 @@ type LetterCase = 'UpperCase' | 'LowerCase';
 
 interface CaseConverter {
 	(source: string): string;
-
-	readonly matcher: RegExp;
 }
