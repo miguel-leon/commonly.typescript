@@ -1,7 +1,7 @@
 function _regexp(flags: string, arg: string | TemplateStringsArray, ...rest: string[]) {
 	return new RegExp(
 		(arg as TemplateStringsArray).raw ?
-			(arg as TemplateStringsArray).raw.reduce((result, _string, i) => result + rest[i - 1] + _string) :
+			String.raw(arg as TemplateStringsArray, ...rest) :
 			arg as string,
 		flags
 	);
