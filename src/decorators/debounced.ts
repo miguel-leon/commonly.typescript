@@ -2,10 +2,10 @@ import { debounce } from '../functions';
 
 
 export function debounced(delay = 500) {
-	return (_: unknown, property: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> => {
+	return <T extends (...args: any[]) => any>(_: unknown, property: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<(...args: Parameters<T>) => void> => {
 		return {
-			...descriptor,
-			value: debounce(descriptor.value, delay)
+			...descriptor as any,
+			value: debounce(descriptor.value!, delay)
 		};
 	};
 }
