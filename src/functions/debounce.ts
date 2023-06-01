@@ -1,4 +1,4 @@
-export function debounce<Args extends any[]>(callback: (...args: Args) => void | Promise<void>, delay = 500): (...args: Args) => void {
+export function debounce<Args extends any[]>(callback: (...args: Args) => void, delay = 500): (...args: Args) => void {
 	let timeoutID: any;
 
 	return function (this: any, ...args: Args) {
