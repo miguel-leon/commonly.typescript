@@ -6,6 +6,7 @@ Commonly <sup>Typescript</sup>
 `import` whole *modules* (*namespaces*) `from 'commonly.typescript'`:
 
 - `Arrays`
+- `Decorators`
 - `Functions`
 - `Objects`
 - `Strings`
@@ -16,6 +17,7 @@ Or `import` individual utilities `from 'commonly.typescript/*'` *(module name in
 ---
 
 ### [`Arrays` module documentation](./arrays.readme.md)
+### [`Decorators` module documentation](./decorators.readme.md)
 ### [`Functions` module documentation](./functions.readme.md)
 ### [`Objects` module documentation](./objects.readme.md)
 ### [`Strings` module documentation](./strings.readme.md)
