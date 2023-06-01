@@ -1,4 +1,4 @@
-import { words } from '../../strings';
+import { words } from '../words';
 
 
 export function CaseConverterFactory({ separator, letterCase, firstLetterCase }: CaseConverterFactory): CaseConverter {
