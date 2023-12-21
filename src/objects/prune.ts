@@ -24,6 +24,6 @@ export type Prune<T> = {
 
 export function prune<T>(object: HasOptionalProperties<T>): Prune<T> {
 	return Object.fromEntries(
-		Object.entries(object).filter(([, v]) => v !== undefined && v !== null)
+		Object.entries(object as any).filter(([, v]) => v !== undefined && v !== null)
 	) as any;
 }
