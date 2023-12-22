@@ -36,4 +36,19 @@ describe('The interpolate function', () => {
 			interpolate('${ missing 1 } ${ missing 2 }', {});
 		}).toThrow();
 	});
+
+	test('allows custom matchers to have multiple capturing groups', () => {
+		const defaultMatcher = interpolate.matcher;
+
+		interpolate.matcher = /\\.|{{\s*([^]*?)\s*}}|\[\[\s*([^]*?)\s*]]/gm;
+
+		const result = interpolate('{{ a }} [[ b ]]', {
+			a: 'Hello',
+			b: 'world'
+		});
+
+		expect(result).toBe('Hello world');
+
+		interpolate.matcher = defaultMatcher;
+	});
 });
