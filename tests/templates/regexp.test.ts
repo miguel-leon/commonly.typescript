@@ -2,7 +2,6 @@ import { regexp } from '@src/templates';
 
 
 describe('The regexp function', () => {
-
 	test('creates a RegExp from a string pattern', () => {
 		const result = regexp('<.+>');
 
@@ -13,6 +12,15 @@ describe('The regexp function', () => {
 		const result = regexp`\b(${ ['hello', 'world'].join('|') })\b|\d{3}`;
 
 		expect(result).toEqual(/\b(hello|world)\b|\d{3}/);
+	});
+
+	test('discarded: creates a RegExp from a tagged template literal interpolating other RegExp (consumer calls `.source`)', () => {
+		const re1 = /\\./;
+		const re2 = /{{[^}]}}/;
+
+		const result = regexp`${ re1.source }|${ re2.source }`;
+
+		expect(result).toEqual(/\\.|{{[^}]}}/);
 	});
 
 	test('adds flags to the RegExp using proxy properties on the tag', () => {
