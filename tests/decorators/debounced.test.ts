@@ -1,10 +1,9 @@
 import { debounced } from '@src/decorators';
 
+
 jest.useFakeTimers();
 
-
 describe('The debounced decorator', () => {
-
 	test('makes only last call to method after delay time', () => {
 		const impl = jest.fn();
 
@@ -26,26 +25,28 @@ describe('The debounced decorator', () => {
 		expect(impl).toHaveBeenNthCalledWith(1, 'three');
 	});
 
-	test('preserves `this` within the member', () => {
+	test('preserves `this` within the member and allows async void functions', () => {
 		const impl = jest.fn();
 
 		class C {
 			att = 9;
 
 			@debounced()
-			debounced() {
+			async debounced(arg: string) {
 				expect(this.att).toBe(9);
+				expect(arg).toBe('three');
+
 				impl();
 			}
 		}
 
 		const obj = new C();
 
-		obj.debounced();
-		obj.debounced();
-		obj.debounced();
+		obj.debounced('one');
+		obj.debounced('two');
+		obj.debounced('three');
 
-		expect(impl).not.toBeCalled();
+		expect(impl).not.toHaveBeenCalled();
 
 		jest.runAllTimers();
 
