@@ -16,5 +16,12 @@ export function interpolate(template: string, context: { [k: string]: any }): st
 
 export namespace interpolate {
 	// eslint-disable-next-line prefer-const
-	export let matcher = /\${\s*((?:\\.|[^])*?)\s*}|\\./gm;
+	export let matcher = /\\.|\${\s*((?:\\.|[^])*?)\s*}/gm;
+
+	export function matches(template: string): boolean {
+		for (const [_, ...captures] of template.matchAll(matcher)) {
+			if (captures.some(Boolean)) return true;
+		}
+		return false;
+	}
 }

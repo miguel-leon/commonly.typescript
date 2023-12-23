@@ -2,7 +2,6 @@ import { interpolate } from '@src/strings';
 
 
 describe('The interpolate function', () => {
-
 	test('interpolate all keys correctly', () => {
 		const result = interpolate('${ a } ${ b }${ c }', {
 			a: 'Hello',
@@ -50,5 +49,14 @@ describe('The interpolate function', () => {
 		expect(result).toBe('Hello world');
 
 		interpolate.matcher = defaultMatcher;
+	});
+
+	describe('interpolate.matches utility function', () => {
+		test('avoid false positives on matches without capturing groups', () => {
+			expect(interpolate.matches('\\/\\/')).toBeFalsy();
+			expect(interpolate.matches('\\/${  }')).toBeFalsy();
+			expect(interpolate.matches('\\/${ a }')).toBeTruthy();
+			expect(interpolate.matches('no match')).toBeFalsy();
+		});
 	});
 });
