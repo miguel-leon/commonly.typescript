@@ -19,7 +19,7 @@ export namespace interpolate {
 	export let matcher = /\\.|\${\s*((?:\\.|[^])*?)\s*}/gm;
 
 	export function matches(template: string): boolean {
-		for (const [_, ...captures] of template.matchAll(matcher)) {
+		for (const [, ...captures] of template.matchAll(matcher)) {
 			if (captures.some(Boolean)) return true;
 		}
 		return false;
