@@ -26,7 +26,7 @@ describe('The multiMap function', () => {
 			[1, 2, 3, 4, 5, 6],
 			[1, 2, 3, 4, 5, 6],
 			[1, 2, 3, 4, 5, 6],
-			([a, b, c], index) => index & 1 ? [a + b + c] : a + b + c
+			([a, b, c], index) => index & 1 ? [a + b + c] as const : a + b + c
 		);
 
 		expect(result).toEqual([3, 6, 9, 12, 15, 18]);
