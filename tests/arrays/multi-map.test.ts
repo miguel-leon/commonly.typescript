@@ -61,6 +61,20 @@ describe('The multiMap function', () => {
 		]);
 	});
 
+	test('maps to sparse arrays when the returned tuples differ in size', () => {
+		const results = multiMap(
+			[1, 2, 3, 4],
+			i => new Array(i).fill(i)
+		);
+
+		expect(results).toEqual([
+			[1,2,3,4],
+			[,2,3,4],
+			[,,3,4],
+			[,,,4],
+		]);
+	});
+
 	test('binds callback function to `thisArg`', () => {
 		const o = {
 			a: 1,
