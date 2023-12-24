@@ -3,12 +3,12 @@ import { multiMap } from '@src/arrays';
 
 describe('The multiMap function', () => {
 	test('maps a single input to a single output', () => {
-		const r = multiMap(
+		const result = multiMap(
 			[1, 2, 3, 4, 5, 6],
 			i => i * 2
 		);
 
-		expect(r).toEqual([2, 4, 6, 8, 10, 12]);
+		expect(result).toEqual([2, 4, 6, 8, 10, 12]);
 	});
 
 	test('maps a single input to multiple outputs', () => {
@@ -91,5 +91,15 @@ describe('The multiMap function', () => {
 		);
 
 		expect(result).toEqual([1, 2, 3]);
+	});
+
+	test('can zip arrays together in tuples by double wrapping the returned tuples', () => {
+		const result = multiMap(
+			[1, 2, 3, 4, 5],
+			['a', 'b', 'c', 'd', 'e'],
+			([a, b]) => [[a, b]]
+		);
+
+		expect(result).toEqual([[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd'], [5, 'e']]);
 	});
 });
