@@ -9,6 +9,21 @@ Commonly <sup>Typescript</sup>
 
 ---
 
+- ### `difference`
+
+Filters the first array argument with elements not existing in all subsequent array arguments.
+
+```typescript
+function difference<T>(from: T[], ...filters: T[][]): T[];
+```
+
+#### Usage:
+
+```typescript
+difference([1, 2, 3, 4, 5, 6, 7, 8], [1, 2], [2, 6, 7]) == [3, 4, 5, 8];
+```
+
+
 - ### `intersperse`
 
 Returns a curried function that creates a new array interspersing `item` between every `n` element.
