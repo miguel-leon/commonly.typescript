@@ -33,4 +33,9 @@ describe('The regexp function', () => {
 		expect(regexp.im(true).g` `).toEqual(/ /gim);
 		expect(regexp.im(false).g` `).toEqual(/ /g);
 	});
+
+	test('copies another RegExp flags by property access', () => {
+		const other = /unused/gim;
+		expect(regexp[other.flags]` `).toEqual(/ /gim);
+	});
 });
