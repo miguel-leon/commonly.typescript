@@ -49,8 +49,7 @@ Traverses up to the shortest length among multiple array arguments.
 Returning sparse tuples from the callback will not add elements, functioning as a map and filter simultaneously.
 
 ```typescript
-function multiMap<El, R, T>(array: El[], callbackFn: (this: T, element: El, index: number, array: El) => R | R[], thisArg?: T): R[] | R[][];
-function multiMap<El, R, T>(...arrays: El[][], callbackFn: (this: T, elements: [El[0], El[1], ...], index: number, ...arrays: El[][]) => R | R[], thisArg?: T): R[] | R[][];
+function multiMap<A, B, ..., R, T>(...arrays: [A[], B[], ...], callbackFn: (this: T, ...elements: [A, B, ...], index: number, ...arrays: [A[], B[], ...]) => R | R[], thisArg?: T): R[] | R[][];
 ```
 
 #### Usage:
@@ -58,8 +57,8 @@ function multiMap<El, R, T>(...arrays: El[][], callbackFn: (this: T, elements: [
 ```typescript
 multiMap([1, 2, 3], i => i * 2) == [2, 4, 6];
 multiMap([1, 2, 3], i => [i * 2, i * i]) == [[2, 4, 6], [1, 4, 9]];
-multiMap([1, 2, 3], [1, 2, 3], [1, 2, 3], ([a, b, c]) => a + b + c) == [3, 6, 9];
-multiMap([1, 2, 3], [1, 2, 3, 4, 5], ([a, b]) => [a + b, a * b]) == [[2, 4, 6], [1, 4, 9]];
+multiMap([1, 2, 3], [1, 2, 3], [1, 2, 3], (a, b, c) => a + b + c) == [3, 6, 9];
+multiMap([1, 2, 3], [1, 2, 3, 4, 5], (a, b) => [a + b, a * b]) == [[2, 4, 6], [1, 4, 9]];
 multiMap([1, 2, 3], i => new Array(i).fill(i)) == [[1,2,3], [2,3], [3]];
 multiMap([1, 2, 3, 4, 5, 6, 7, 8, 9], n => n % 2 ? [n,] : [,n]) == [[1, 3, 5, 7, 9], [2, 4, 6, 8]];
 ```

@@ -21,12 +21,12 @@ describe('The multiMap function', () => {
 		expect(squares).toEqual([1, 4, 9, 16, 25, 36]);
 	});
 
-	test('maps multiple inputs to a single output (with or without wrapping in a single element array)', () => {
+	test('maps multiple inputs to a single output', () => {
 		const result = multiMap(
 			[1, 2, 3, 4, 5, 6],
 			[1, 2, 3, 4, 5, 6],
 			[1, 2, 3, 4, 5, 6],
-			([a, b, c], index) => index & 1 ? [a + b + c] as const : a + b + c
+			(a, b, c) => a + b + c
 		);
 
 		expect(result).toEqual([3, 6, 9, 12, 15, 18]);
@@ -36,7 +36,7 @@ describe('The multiMap function', () => {
 		const [summations, multiplications] = multiMap(
 			[1, 2, 3, 4, 5, 6],
 			[1, 2, 3, 4, 5, 6, 7, 8, 9],
-			([a, b]) => [a + b, a * b]
+			(a, b) => [a + b, a * b]
 		);
 
 		expect(summations).toEqual([2, 4, 6, 8, 10, 12]);
@@ -65,7 +65,7 @@ describe('The multiMap function', () => {
 		const results = multiMap(
 			[1, 2, 3, 4],
 			(i, index) => {
-				const result = new Array(4).fill(undefined);
+				const result = new Array<number | undefined>(4).fill(undefined);
 				result[index] = i;
 				return result;
 			}
@@ -82,14 +82,14 @@ describe('The multiMap function', () => {
 	test('does not map to sparse arrays also when the output tuples differ in size', () => {
 		const results = multiMap(
 			[1, 2, 3, 4],
-			i => new Array(i).fill(i)
+			i => new Array<number>(i).fill(i)
 		);
 
 		expect(results).toEqual([
-			[1,2,3,4],
-			[2,3,4],
-			[3,4],
-			[4],
+			[1, 2, 3, 4],
+			[2, 3, 4],
+			[3, 4],
+			[4]
 		]);
 	});
 
@@ -112,10 +112,10 @@ describe('The multiMap function', () => {
 	});
 
 	test('can zip arrays together in tuples by double wrapping the returned tuples', () => {
-		const result = multiMap(
+		const [result] = multiMap(
 			[1, 2, 3, 4, 5],
 			['a', 'b', 'c', 'd', 'e'],
-			([a, b]) => [[a, b]]
+			(a, b) => [[a, b] as [number, string]]
 		);
 
 		expect(result).toEqual([[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd'], [5, 'e']]);
@@ -124,10 +124,39 @@ describe('The multiMap function', () => {
 	test('split an array into groups', () => {
 		const [odd, even] = multiMap(
 			[1, 2, 3, 4, 5, 6, 7, 8, 9],
-			n => n % 2 ? [n,] : [,n]
+			n => (n % 2 ? [n, ] : [, n]) as number[]
 		);
 
 		expect(odd).toEqual([1, 3, 5, 7, 9]);
 		expect(even).toEqual([2, 4, 6, 8]);
-	})
+	});
+
+	test('split an array into groups regardless of the size of the input array if the outputs are tuples', () => {
+		let [one, two, three] = multiMap(
+			[0],
+			n => [, , n]
+		);
+
+		expect(one).toEqual([]);
+		expect(two).toEqual([]);
+		expect(three).toEqual([0]);
+
+		[one, two, three] = multiMap(
+			[0],
+			n => [, n, ,] // needs an additional comma because javascript doesn't count the last one as sparse
+		);
+
+		expect(one).toEqual([]);
+		expect(two).toEqual([0]);
+		expect(three).toEqual([]);
+
+		[one, two, three] = multiMap(
+			[0],
+			n => [n, , ,] // needs an additional comma because javascript doesn't count the last one as sparse
+		);
+
+		expect(one).toEqual([0]);
+		expect(two).toEqual([]);
+		expect(three).toEqual([]);
+	});
 });
