@@ -1,4 +1,4 @@
-import { multiMap } from '@src/arrays';
+import { filterValue, multiMap } from '@src/arrays';
 
 
 describe('The multiMap function', () => {
@@ -102,4 +102,14 @@ describe('The multiMap function', () => {
 
 		expect(result).toEqual([[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd'], [5, 'e']]);
 	});
+
+	test('split an array into groups', () => {
+		const [odd, even] = multiMap(
+			[1, 2, 3, 4, 5, 6, 7, 8, 9],
+			n => n % 2 ? [n,] : [,n]
+		);
+
+		expect(filterValue(odd, undefined)).toEqual([1, 3, 5, 7, 9]);
+		expect(filterValue(even, undefined)).toEqual([2, 4, 6, 8]);
+	})
 });
