@@ -25,7 +25,7 @@ export function multiMap(...args: any) {
 		);
 
 		(Array.isArray(result) ? result : [result]).forEach((r, j) => {
-			(results[j] ??= new Array(length))[i] = r;
+			(results[j] ??= []).push(r);
 		});
 	}
 

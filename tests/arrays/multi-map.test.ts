@@ -1,4 +1,4 @@
-import { filterValue, multiMap } from '@src/arrays';
+import { multiMap } from '@src/arrays';
 
 
 describe('The multiMap function', () => {
@@ -43,7 +43,7 @@ describe('The multiMap function', () => {
 		expect(multiplications).toEqual([1, 4, 9, 16, 25, 36]);
 	});
 
-	test('maps to sparse arrays when output tuples lack an element on an iteration', () => {
+	test('sparse positions in output tuples are not appended and the resulting arrays are not sparse', () => {
 		const results = multiMap(
 			[1, 2, 3, 4],
 			(i, index) => {
@@ -54,14 +54,32 @@ describe('The multiMap function', () => {
 		);
 
 		expect(results).toEqual([
-			[1,,,],
-			[,2,,],
-			[,,3,],
-			[,,,4]
+			[1],
+			[2],
+			[3],
+			[4]
 		]);
 	});
 
-	test('maps to sparse arrays when the returned tuples differ in size', () => {
+	test('fill tuple positions with undefined when a result similar to a sparse array is desired', () => {
+		const results = multiMap(
+			[1, 2, 3, 4],
+			(i, index) => {
+				const result = new Array(4).fill(undefined);
+				result[index] = i;
+				return result;
+			}
+		);
+
+		expect(results).toEqual([
+			[1, undefined, undefined, undefined],
+			[undefined, 2, undefined, undefined],
+			[undefined, undefined, 3, undefined],
+			[undefined, undefined, undefined, 4]
+		]);
+	});
+
+	test('does not map to sparse arrays also when the output tuples differ in size', () => {
 		const results = multiMap(
 			[1, 2, 3, 4],
 			i => new Array(i).fill(i)
@@ -69,9 +87,9 @@ describe('The multiMap function', () => {
 
 		expect(results).toEqual([
 			[1,2,3,4],
-			[,2,3,4],
-			[,,3,4],
-			[,,,4],
+			[2,3,4],
+			[3,4],
+			[4],
 		]);
 	});
 
@@ -109,7 +127,7 @@ describe('The multiMap function', () => {
 			n => n % 2 ? [n,] : [,n]
 		);
 
-		expect(filterValue(odd, undefined)).toEqual([1, 3, 5, 7, 9]);
-		expect(filterValue(even, undefined)).toEqual([2, 4, 6, 8]);
+		expect(odd).toEqual([1, 3, 5, 7, 9]);
+		expect(even).toEqual([2, 4, 6, 8]);
 	})
 });
