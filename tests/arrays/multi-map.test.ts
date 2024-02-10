@@ -2,6 +2,12 @@ import { multiMap } from '@src/arrays';
 
 
 describe('The multiMap function', () => {
+	test('maps an empty array to an empty array', () => {
+		const result = multiMap([], () => {});
+
+		expect(result).toEqual([]);
+	});
+
 	test('maps a single input to a single output', () => {
 		const result = multiMap(
 			[1, 2, 3, 4, 5, 6],

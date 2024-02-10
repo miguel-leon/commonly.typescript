@@ -24,7 +24,7 @@ export function multiMap(...args: any) {
 			longestTuple = Math.max(longestTuple, result.length);
 			result.forEach((r, j) => {
 				(results[j] ??= []).push(r);
-			})
+			});
 		} else {
 			results.push(result);
 		}
