@@ -13,7 +13,7 @@ describe('The debounce function', () => {
 		debounced('two');
 		debounced('three');
 
-		expect(callback).not.toBeCalled();
+		expect(callback).not.toHaveBeenCalled();
 
 		jest.runAllTimers();
 

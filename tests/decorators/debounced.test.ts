@@ -18,7 +18,7 @@ describe('The debounced decorator', () => {
 		C.debounced('two');
 		C.debounced('three');
 
-		expect(impl).not.toBeCalled();
+		expect(impl).not.toHaveBeenCalled();
 
 		jest.runAllTimers();
 

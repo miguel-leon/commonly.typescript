@@ -1,7 +1,7 @@
-export function debounce<Args extends any[]>(callback: (...args: Args) => void, delay = 500): (...args: Args) => void {
+export function debounce<Args extends any[]>(callback: (...args: Args) => any, delay = 500): (...args: Args) => Promise<void> {
 	let timeoutID: any;
 
-	return function (this: any, ...args: Args) {
+	return async function (this: any, ...args: Args) {
 		clearTimeout(timeoutID);
 		timeoutID = setTimeout(callback.bind(this), delay, ...args);
 	};
