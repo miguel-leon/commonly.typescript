@@ -1,6 +1,6 @@
 {
   "name": "commonly.typescript",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "Well typed sorted utilities commonly desired.",
   "scripts": {
     "dev": "tsc --watch",

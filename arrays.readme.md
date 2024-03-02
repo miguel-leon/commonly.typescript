@@ -62,3 +62,22 @@ multiMap([1, 2, 3], [1, 2, 3, 4, 5], (a, b) => [a + b, a * b]) == [[2, 4, 6], [1
 multiMap([1, 2, 3], i => new Array(i).fill(i)) == [[1,2,3], [2,3], [3]];
 multiMap([1, 2, 3, 4, 5, 6, 7, 8, 9], n => n % 2 ? [n,] : [,n]) == [[1, 3, 5, 7, 9], [2, 4, 6, 8]];
 ```
+
+
+
+- ### `rearrange`
+
+Rearranges elements from an index onto another. Clamps indices and count so that the operation is always possible.
+
+```typescript
+function rearrange<T>(array: T[], from: number, to: number, count = 1): T[];
+```
+
+#### Usage:
+
+```typescript
+rearrange([A, B, C, D, E, F], 1, 4) == [A, C, D, E, B, F];
+rearrange([A, B, C, D, E, F], 4, 1) == [A, E, B, C, D, F];
+rearrange([A, B, C, D, E, F], 0, 2, 4) == [C, A, B, D, E, F];
+rearrange([A, B, C, D, E, F], -2, -3, 4) == [A, B, C, E, F, D];
+```
