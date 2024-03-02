@@ -9,6 +9,7 @@ Commonly <sup>Typescript</sup>
 - `Collections`
 - `Decorators`
 - `Functions`
+- `Numbers`
 - `Objects`
 - `Strings`
 - `Templates`
@@ -21,6 +22,7 @@ Or `import` individual utilities `from 'commonly.typescript/*'` *(module name in
 ### [`Collections` module documentation](./collections.readme.md)
 ### [`Decorators` module documentation](./decorators.readme.md)
 ### [`Functions` module documentation](./functions.readme.md)
+### [`Numbers` module documentation](./numbers.readme.md)
 ### [`Objects` module documentation](./objects.readme.md)
 ### [`Strings` module documentation](./strings.readme.md)
 ### [`Templates` module documentation](./templates.readme.md)
