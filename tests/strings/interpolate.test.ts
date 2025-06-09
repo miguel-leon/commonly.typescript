@@ -20,7 +20,7 @@ describe('The interpolate function', () => {
 			+ backslash.repeat(7) + '${ escaped }';
 
 		const result = interpolate(template, {
-			not_escaped: 'INTERPOLATED',
+			'not_escaped': 'INTERPOLATED',
 			'end_escaped\\}': 'INTERPOLATED'
 		});
 

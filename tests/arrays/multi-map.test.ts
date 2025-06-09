@@ -130,7 +130,7 @@ describe('The multiMap function', () => {
 	test('split an array into groups', () => {
 		const [odd, even] = multiMap(
 			[1, 2, 3, 4, 5, 6, 7, 8, 9],
-			n => (n % 2 ? [n, ] : [, n]) as number[]
+			n => (n % 2 ? [n,,] : [, n]) as number[]
 		);
 
 		expect(odd).toEqual([1, 3, 5, 7, 9]);

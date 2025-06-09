@@ -37,7 +37,7 @@ cases.sentence('Hell0 It\'s Me') == 'Hell0 it\'s me';
 Interpolate expressions on a non [Template Literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) string.
 
 ```typescript
-function interpolate(template: string, context: { [k: string]: any }): string;
+function interpolate(template: string, context: Record<string, string>): string;
 ```
 
 The default matcher used for interpolating is exposed and can be globally changed in `interpolate.matcher`, it is type `RegExp`.

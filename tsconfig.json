@@ -3,14 +3,16 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
+    "strict": true,
     "declaration": true,
     "esModuleInterop": true,
+    "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
     "noImplicitReturns": true,
-    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "./dist"
   },
-  "include": [
-    "./src"
-  ]
+  "include": ["./src"]
 }

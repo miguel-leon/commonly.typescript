@@ -14,7 +14,7 @@ Commonly <sup>Typescript</sup>
 Creates a debounced version of the function argument `callback`.
 
 ```typescript
-function debounce<Args extends any[]>(callback: (...args: Args) => void, delay = 500): (...args: Args) => void;
+function debounce<Args extends unknown[]>(callback: (...args: Args) => void, delay = 500): (...args: Args) => void;
 ```
 
 #### Usage:

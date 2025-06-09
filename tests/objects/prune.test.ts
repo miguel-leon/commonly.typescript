@@ -1,9 +1,8 @@
 import { prune } from '@src/objects';
 
 describe('The prune function', () => {
-
 	test('returns new object without the nullish properties', () => {
-		const object: { a: false, b: undefined, c: null, d?: number } = { a: false, b: undefined, c: null };
+		const object: { a: false; b: undefined; c: null; d?: number } = { a: false, b: undefined, c: null };
 		const result = prune(object);
 		// typeof result = { a: false, d: number }
 		expect(result).toEqual({ a: false });

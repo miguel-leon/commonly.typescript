@@ -9,7 +9,7 @@ describe('The debounced decorator', () => {
 
 		class C {
 			@debounced()
-			static debounced(arg: any) {
+			static debounced(arg: unknown) {
 				impl(arg);
 			}
 		}

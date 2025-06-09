@@ -1,1 +1,1 @@
-export type Function_ = (...args: any[]) => any;
+export type Callable = (...args: any) => unknown;

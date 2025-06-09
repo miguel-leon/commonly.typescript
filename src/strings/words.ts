@@ -20,15 +20,15 @@ export namespace words {
 	export const matcher = new RegExp(
 		ALTERNATIVES(
 			// starts with letter
-			A(LOWERCASE, UPPERCASE) +
-			ALTERNATIVES(
+			A(LOWERCASE, UPPERCASE)
+			+ ALTERNATIVES(
 				A(LOWERCASE),
 				DIGIT + ONE_OR_MORE + NOT_FOLLOWED_BY(A(LOWERCASE, DIGIT)),
 				APOSTROPHE
 			) + NONE_OR_MORE,
 			// starts with number
-			DIGIT + ONE_OR_MORE +
-			ALTERNATIVES(
+			DIGIT + ONE_OR_MORE
+			+ ALTERNATIVES(
 				A(LOWERCASE),
 				APOSTROPHE
 			) + NONE_OR_MORE

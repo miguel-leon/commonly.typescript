@@ -4,7 +4,6 @@ jest.useFakeTimers();
 
 
 describe('The debounce function', () => {
-
 	test('makes only last call to callback after delay time', () => {
 		const callback = jest.fn();
 		const debounced = debounce(callback);

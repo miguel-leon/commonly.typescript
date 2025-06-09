@@ -6,8 +6,8 @@ export function CaseConverterFactory({ separator, letterCase, firstLetterCase }:
 		return words(source)
 			.map(
 				(word, index) =>
-					word.charAt(0)[`to${ index ? letterCase : firstLetterCase }`]() +
-					word.substring(1)
+					word.charAt(0)[`to${ index ? letterCase : firstLetterCase }`]()
+					+ word.substring(1)
 			)
 			.join(separator);
 	};

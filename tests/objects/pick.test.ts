@@ -2,7 +2,6 @@ import { pick } from '@src/objects';
 
 
 describe('The pick function', () => {
-
 	const objectA = {
 		prop1: 'A1',
 		prop2: 'A2'

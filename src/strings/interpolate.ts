@@ -1,8 +1,8 @@
-export function interpolate(template: string, context: { [k: string]: any }): string {
+export function interpolate(template: string, context: Record<string, string>): string {
 	return template.replaceAll(
 		interpolate.matcher,
 		(match, ...captures) => {
-			const key = captures.slice(0, -2).find(Boolean);
+			const key = captures.slice(0, -2).find(Boolean) as string | undefined;
 			if (!key) return match;
 
 			const value = context[key];

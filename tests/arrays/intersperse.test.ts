@@ -1,7 +1,6 @@
 import { intersperse } from '@src/arrays';
 
 describe('The intersperse function', () => {
-
 	test.each`
 		initial		| every		| expected
 		${ 0 }		| ${ 1 }	| ${ 0 }
