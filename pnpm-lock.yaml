@@ -26,6 +26,9 @@ importers:
       ts-jest:
         specifier: ^29.3.4
         version: 29.3.4(@babel/core@7.27.4)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.27.4))(jest@29.7.0(@types/node@22.15.30))(typescript@5.8.3)
+      tsc-esm-patch:
+        specifier: link:../tsc-esm-patch/dist
+        version: link:../tsc-esm-patch/dist
       typescript:
         specifier: ^5.8.3
         version: 5.8.3

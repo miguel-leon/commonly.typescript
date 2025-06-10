@@ -3,10 +3,9 @@
 import { createDefaultPreset, pathsToModuleNameMapper } from 'ts-jest';
 
 
-const tsJestPreset = createDefaultPreset();
-const [[, options]] = Object.values(tsJestPreset.transform);
-options.tsconfig = './tsconfig.test.json';
-const { default: { compilerOptions } } = await import(options.tsconfig, { with: { type: 'json' } });
+const tsconfig = './tsconfig.test.json';
+const tsJestPreset = createDefaultPreset({ tsconfig });
+const { default: { compilerOptions } } = await import(tsconfig, { with: { type: 'json' } });
 
 export default {
 	testEnvironment: 'node',
