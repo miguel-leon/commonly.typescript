@@ -2,6 +2,7 @@
   "name": "commonly.typescript",
   "version": "0.3.0",
   "description": "Well typed sorted utilities commonly desired.",
+  "type": "module",
   "scripts": {
     "dev": "tsc --watch",
     "lint": "eslint .",
