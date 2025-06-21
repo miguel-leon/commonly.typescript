@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "test": "jest",
     "build": "tsc && tsc-esm-patch",
-    "postbuild": "pnpm run build-cjs && pnpm run copy-files",
+    "postbuild": "pnpm build-cjs && pnpm copy-files",
     "build-cjs": "tsc -p tsconfig-cjs.json",
     "copy-files": "cp package.json , *readme.md ./dist"
   },

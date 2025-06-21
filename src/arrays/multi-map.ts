@@ -1,10 +1,15 @@
 import { Callable } from '../types';
 
 
+export function multiMap<Array extends readonly unknown[], R extends readonly [unknown?, unknown?, unknown?, unknown?, unknown?], T>(array: Array, callbackFn: (this: T, element: Array[number], index: number, array: Array) => R, thisArg?: T): TupleItemsToArray<R>;
 export function multiMap<Array extends readonly unknown[], R, T>(array: Array, callbackFn: (this: T, element: Array[number], index: number, array: Array) => R, thisArg?: T): R[];
+export function multiMap<A extends readonly unknown[], B extends readonly unknown[], R extends readonly [unknown?, unknown?, unknown?, unknown?, unknown?], T>(a: A, b: B, callbackFn: (this: T, element_a: A[number], element_b: B[number], index: number, a: A, b: B) => R, thisArg?: T): TupleItemsToArray<R>;
 export function multiMap<A extends readonly unknown[], B extends readonly unknown[], R, T>(a: A, b: B, callbackFn: (this: T, element_a: A[number], element_b: B[number], index: number, a: A, b: B) => R, thisArg?: T): R[];
+export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], R extends readonly [unknown?, unknown?, unknown?, unknown?, unknown?], T>(a: A, b: B, c: C, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], index: number, a: A, b: B, c: C) => R, thisArg?: T): TupleItemsToArray<R>;
 export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], R, T>(a: A, b: B, c: C, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], index: number, a: A, b: B, c: C) => R, thisArg?: T): R[];
+export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], D extends readonly unknown[], R extends readonly [unknown?, unknown?, unknown?, unknown?, unknown?], T>(a: A, b: B, c: C, d: D, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], element_d: D[number], index: number, a: A, b: B, c: C, d: D) => R, thisArg?: T): TupleItemsToArray<R>;
 export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], D extends readonly unknown[], R, T>(a: A, b: B, c: C, d: D, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], element_d: D[number], index: number, a: A, b: B, c: C, d: D) => R, thisArg?: T): R[];
+export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], D extends readonly unknown[], E extends readonly unknown[], R extends readonly [unknown?, unknown?, unknown?, unknown?, unknown?], T>(a: A, b: B, c: C, d: D, e: E, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], element_d: D[number], element_e: E[number], index: number, a: A, b: B, c: C, d: D, e: E) => R, thisArg?: T): TupleItemsToArray<R>;
 export function multiMap<A extends readonly unknown[], B extends readonly unknown[], C extends readonly unknown[], D extends readonly unknown[], E extends readonly unknown[], R, T>(a: A, b: B, c: C, d: D, e: E, callbackFn: (this: T, element_a: A[number], element_b: B[number], element_c: C[number], element_d: D[number], element_e: E[number], index: number, a: A, b: B, c: C, d: D, e: E) => R, thisArg?: T): R[];
 export function multiMap(...args: unknown[]) {
 	const [arrays, mapper, thisArg] = (
@@ -40,3 +45,17 @@ export function multiMap(...args: unknown[]) {
 
 	return results;
 }
+
+
+type TupleItemsToArray<R> =
+	[R] extends [readonly [(infer A)?]] ?
+		[A[]?] :
+		[R] extends [readonly [(infer A)?, (infer B)?]] ?
+			[A[]?, B[]?] :
+			[R] extends [readonly [(infer A)?, (infer B)?, (infer C)?]] ?
+				[A[]?, B[]?, C[]?] :
+				[R] extends [readonly [(infer A)?, (infer B)?, (infer C)?, (infer D)?]] ?
+					[A[]?, B[]?, C[]?, D[]?] :
+					[R] extends [readonly [(infer A)?, (infer B)?, (infer C)?, (infer D)?, (infer E)?]] ?
+						[A[]?, B[]?, C[]?, D[]?, E[]?] :
+						never;
